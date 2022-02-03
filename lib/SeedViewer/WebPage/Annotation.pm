@@ -9,9 +9,32 @@ use URI::Escape;
 use strict;
 use warnings;
 
-use AlignsAndTreesServer;
+our $have_aligns;
+eval {
+    require AlignsAndTreesServer;
+    $have_aligns = 1;
+};
+
+our $have_anno;
+eval {
+    require ANNOserver;
+    $have_anno = 1;
+};
+
+our $have_alitre;
+eval {
+    require ALITREserver;
+    $have_alitre = 1;
+};
+
+our $have_sap;
+eval {
+    require SAPserver;
+    $have_sap = 1;
+};
+
+
 use SeedUtils;
-use ANNOserver;
 use Tracer;
 use HTML;
 our $have_ffs;
@@ -22,8 +45,6 @@ eval {
 };
 use FIGRules;
 use SeedViewer::SeedViewer;
-use SAPserver;
-use AlignsAndTreesServer;
 
 use Data::Dumper;
 use FreezeThaw qw( freeze thaw );
@@ -181,7 +202,7 @@ if (!$just_compare) {
   #
   my $kmer_assignment = '';
   my $protein = $fig->get_translation($id);
-  if ((my $server_url = $FIG_Config::anno_server_url) && $id =~ /\.peg\./)
+  if ($have_anno && (my $server_url = $FIG_Config::anno_server_url) && $id =~ /\.peg\./)
   {
       my $anno = new ANNOserver(url => $server_url);
       if ($anno)
@@ -387,18 +408,22 @@ function sh_aliases2 () {
       close($fh);
   }
 
-  my $sap = SAPserver->new();
-  my $rel = $sap->coregulated_fids(-ids => [$id]);
-  my $relH = $rel->{$id};
-  my $n = keys %$relH;
-  my $coreg_str;
-  if ($n > 0)
-  {
-      my $url = $application->url . "?page=CoregulatedFeatures&feature=$id";
-      my $txt = "<a href='$url'>$n pegs</a>";
-      $coreg_str = "<tr><th>coregulated with</th><td>$txt</td></tr>";
-  }
 
+  my $coreg_str;
+  if ($have_sap)
+  {
+      my $sap = SAPserver->new();
+      my $rel = $sap->coregulated_fids(-ids => [$id]);
+      my $relH = $rel->{$id};
+      my $n = keys %$relH;
+      if ($n > 0)
+      {
+	  my $url = $application->url . "?page=CoregulatedFeatures&feature=$id";
+	  my $txt = "<a href='$url'>$n pegs</a>";
+	  $coreg_str = "<tr><th>coregulated with</th><td>$txt</td></tr>";
+      }
+  }
+  
   my $edit_fr_str;
   if ($function ne '')
   {
@@ -530,8 +555,13 @@ function sh_aliases2 () {
   }
 
   my $aligntree = ""; 
+  my @alignIDs;
+
+  if ($have_aligns)
+  {
+      @alignIDs = AlignsAndTreesServer::aligns_with_pegID( $id );
+  }
   
-  my @alignIDs = AlignsAndTreesServer::aligns_with_pegID( $id );
   my $num = @alignIDs;
   
   my $seed_user = $cgi->param('user') || annotation_username($application, $user) || "";
@@ -1025,14 +1055,21 @@ sub delete_feature {
   $application->add_message('info', "The feature $feature has been deleted.");
 }
 
-use ALITREserver;
-use SAPserver;
+
+
 sub in_ali_trees {
     my($peg) = @_;
 
-    my $sap = SAPserver->new;
-    my $al = ALITREserver->new;
-    my $md5 = $sap->fids_to_proteins(-ids => [$peg])->{$peg};
-    my $atIDs = $al->aligns_with_md5ID(-ids => [$md5])->{$md5};
-    return ($atIDs ? @$atIDs : ());
+    if ($have_alitre)
+    {
+	my $sap = SAPserver->new;
+	my $al = ALITREserver->new;
+	my $md5 = $sap->fids_to_proteins(-ids => [$peg])->{$peg};
+	my $atIDs = $al->aligns_with_md5ID(-ids => [$md5])->{$md5};
+	return ($atIDs ? @$atIDs : ());
+    }
+    else
+    {
+	return ();
+    }
 }
