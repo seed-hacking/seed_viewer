@@ -1,0 +1,20 @@
+/********************************************************/
+/*  HEADER AND BODY                                     */
+/********************************************************/
+
+@import "../wiki/pub/Main/TWikiPreferences/NmpdrStyleOverrides.css";
+
+th {
+    font-size: 12px;
+	font-family: Tahoma, Arial, sans-serif;
+	font-weight:bold;
+	color: #8C0015;
+    background: #ffffff;
+    vertical-align: top;
+    padding: 3px 5px 3px 5px;
+}
+
+#multibar {
+    background-color: #e3e3e3;
+}
+

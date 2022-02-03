@@ -1,0 +1,87 @@
+.msg {
+    padding: 8px;
+    margin: 2px;
+    border: solid 2px #CCC;
+}
+
+.msgUnknown {
+    background-color: #EEE;
+}
+
+.msgGood {
+    background-color: #BEB;
+}
+
+.msgBad {
+    background-color: #EBB;
+}
+
+.msg img {
+    vertical-align: middle;
+    height: 16px;
+}
+
+form#importForm {
+    font-size: 16px;
+    margin: auto;
+    width: 800px;
+}
+
+form#importForm input {
+    font-size: 16px;
+    padding: 8px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: solid 2px #CCC;
+}
+
+form#importForm button {
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+}
+
+form fieldset {
+  margin-bottom: 10px;
+}
+form legend {
+  padding: 0 2px;
+  font-weight: bold;
+}
+form label {
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: top;
+}
+form fieldset ol {
+  margin: 0;
+  padding: 0;
+}
+form fieldset li {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+}
+form fieldset fieldset {
+  border: none;
+  margin: 3px 0 0;
+}
+form fieldset fieldset legend {
+  padding: 0 0 5px;
+  font-weight: normal;
+}
+form fieldset fieldset label {
+  display: block;
+  width: auto;
+}
+form em {
+  font-weight: bold;
+  font-style: normal;
+  color: #f00;
+}
+form label {
+  width: 180px; /* Width of labels */
+}
+form fieldset fieldset label {
+  margin-left: 183px; /* Width plus 3 (html space) */
+}

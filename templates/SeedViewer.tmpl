@@ -1,0 +1,72 @@
+<body>
+<div id="header">
+  <span id="logo">
+  <img height="95px" src="./Html/seed-logo-green.png" alt="The SEED" />
+  </span>
+  <p>
+  <span id="title">
+  <img src="./Html/seed-theseed-viewer.png" alt="The SEED Viewer" />
+  </span>
+  <span id="version">SEED Viewer version 2.0</span>
+  </p>
+  <p>Welcome to the SEED Viewer - a read-only browser of the curated SEED data. <br/>
+  For more information about The SEED please visit <a href="http://www.theseed.org">theSEED.org.</a>
+<TMPL_IF NAME="SEEDVIEWER_SHOW_DAILY_SEED">
+  <br/>For daily updates on SEED activity visit the <a href="http://theseed.org/daily">Daily SEED</a>
+</TMPL_IF>
+  </p>
+
+
+
+
+</div>
+
+<div id="topbar">
+  <table style="width: 100%; border-spacing: 0px;">
+    <tr>
+      <td style='width: 100%; padding: 0px;'>
+	<TMPL_IF NAME="MENU">
+	  <TMPL_VAR NAME="MENU">
+	</TMPL_IF>
+      </td>
+      <td style="border-right: 2px solid #5DA668; padding: 0px;">
+<TMPL_IF NAME="SEEDVIEWER_USE_FIND_PAGE">
+	<div id='search'><form style='margin: 0px; padding: 0px;'><input type='submit' value='find' style='width:40px;cursor: pointer;'><input type='text' name='pattern'><input type='hidden' name='page' value='Find'><input type='hidden' name='act' value='check_search'><input type='submit' style='display:none;'></form></div>
+<TMPL_ELSE>
+	<div id='search'><form style='margin: 0px; padding: 0px;'><input type='submit' value='find' style='width:40px;cursor: pointer;'><input type='text' name='pattern'><input type='hidden' name='page' value='SearchResult'><input type='hidden' name='action' value='check_search'><input type='submit' style='display:none;'></form></div>
+</TMPL_IF>
+      </td>
+      <td style="text-align: right; padding: 0px;">
+	<TMPL_IF NAME="USER">
+	  <TMPL_VAR NAME="USER">
+	</TMPL_IF>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+ <TMPL_IF NAME="WARNINGS">
+  <div id="warning">
+    <TMPL_LOOP NAME="WARNINGS">
+     <p class="warning"> <strong> Warning: </strong> <TMPL_VAR NAME="MSG"> </p>
+     </TMPL_LOOP>
+  </div>
+  </TMPL_IF>
+
+  <TMPL_IF NAME="INFO">
+  <div id="info">
+     <TMPL_LOOP NAME="INFO">
+     <p class="info"> <strong> Info: </strong> <TMPL_VAR NAME="MSG"> </p>
+     </TMPL_LOOP>
+  </div>
+  </TMPL_IF>
+  
+  <div id="content">
+    <TMPL_VAR NAME="CONTENT">
+  </div>
+<TMPL_IF NAME="ANALYTICS">
+<TMPL_VAR NAME="ANALYTICS">
+</TMPL_IF>
+    
+</body>

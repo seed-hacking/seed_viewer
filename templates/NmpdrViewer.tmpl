@@ -1,0 +1,72 @@
+<body>
+<div id="patternPage">
+<div id="patternTopBar"><div id="patternTopBarContents">
+<!-- banner goes here -->
+  <img src="wiki/pub/Main/TWikiPreferences/banner2.png" alt="Banner" width="980" height="85" border="0" usemap="#nmpdrlogo" />
+<!-- after banner -->
+    <map name="nmpdrlogo">
+      <area shape="rect" coords="5,3,226,84" title="go to NMPDR home" href="../index.php" />
+      <area shape="rect" coords="232,3,378,84" title="go to Campylobacter" href="wiki/view.cgi/Main/Campylobacter" />
+      <area shape="rect" coords="382,3,528,84" title="go to Listeria" href="wiki/view.cgi/Main/Listeria" />
+      <area shape="rect" coords="532,3,678,84" title="go to Staphylococcus" href="wiki/view.cgi/Main/Staphylococcus" />
+      <area shape="rect" coords="682,3,828,84" title="go to Streptococcus" href="wiki/view.cgi/Main/Streptococcus" />
+      <area shape="rect" coords="832,3,978,84" title="go to Vibrio" href="wiki/view.cgi/Main/Vibrio" />
+    </map>
+  <div class="patternToolBarButtons">
+    <div id="multibar">
+  <form id="jumpForm" action="wiki/view.cgi/Main/%USERSWEB%/SiteSearch">
+  <input type="hidden" name="cx" value="008515096704503004820:wcuvhywp8h4" />
+  <input type="hidden" name="cof" value="FORID:11" />
+  <script type="text/javascript" src="Html/nmpdr.js"></script>
+  <script type="text/javascript">
+    function setJumpLink(url, field) { }
+    function setJumpValue(url, field) {
+      setDefaultText(field);
+    }
+    </script>
+    <input name="q" type="text" class="twikiInputField patternFormFieldDefaultColor" size="20" value="Site Search" onFocus="clearDefaultandCSS(this);" onBlur="setJumpValue('wiki/view.cgi', this);" onkeyup="setJumpLink('wiki/view.cgi', this);" />
+    <input type="image" src="wiki/pub/TWiki/TWikiDocGraphics/searchtopic.gif" name="sa" value="Search" />
+    </form>
+    <form id="searchForm" method="post" action="SearchSkeleton.cgi" target="_blank"><input type="hidden" name="Class" value="WordSearch" />
+      Data Searches: <input name="keywords" type="text" class="twikiInputField patternFormFieldDefaultColor" value="Keywords or numerical ID" onFocus="clearDefaultandCSS(this);" onBlur="setDefaultText(this);" size="25" />
+      <input type="hidden" name="Search" value="Go" /><input type="submit" value="Go" name="searchButton" class="twikiSubmit" />
+      | <a href="SearchSkeleton.cgi?Class=FidSearch">Advanced</a>
+      | <a href="SearchSkeleton.cgi?Class=BlastSearch">BLAST or Scan</a>
+      | <a href="SearchSkeleton.cgi?Class=SubSearch">Subsystems</a>
+      | <a href="wiki/view.cgi/Main/OrganismDataSummaries">Organisms</a>
+    </form></div><!-- multibar -->
+  </div><!-- /patternToolBarButtons -->
+<br class="twikiClear" />
+<div id="topbar">
+  <TMPL_IF NAME="MENU">
+  <TMPL_VAR NAME="MENU">
+  </TMPL_IF>
+
+  <TMPL_IF NAME="USER">
+  <TMPL_VAR NAME="USER">
+  </TMPL_IF>
+</div>
+</div></div><!-- /patternTopBar-->
+
+ <TMPL_IF NAME="WARNINGS">
+  <div id="warning">
+    <TMPL_LOOP NAME="WARNINGS">
+     <p class="warning"> <strong> Warning: </strong> <TMPL_VAR NAME="MSG"> </p>
+     </TMPL_LOOP>
+  </div>
+  </TMPL_IF>
+
+  <TMPL_IF NAME="INFO">
+  <div id="info">
+     <TMPL_LOOP NAME="INFO">
+     <p class="info"> <strong> Info: </strong> <TMPL_VAR NAME="MSG"> </p>
+     </TMPL_LOOP>
+  </div>
+  </TMPL_IF>
+  
+  <div id="content">
+    <TMPL_VAR NAME="CONTENT">
+  </div>
+</script>
+</div>
+</body>

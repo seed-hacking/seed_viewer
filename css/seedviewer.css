@@ -1,0 +1,52 @@
+/********************************************************/
+/*  HEADER AND BODY                                     */
+/********************************************************/
+
+#header {
+    padding: 5px 10px 5px 10px;
+    margin: 0px;
+    background: #466d94 url(./seed-bg-header.png);
+    background-repeat: repeat-x;
+    color: #eee;
+}
+
+#header a:link, #header a:visited {
+    color: #eee;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+#header a:hover, #header a:focus {
+    color: #333;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+
+#logo {
+    float: left;
+    margin: 0px 20px 0px 10px;
+}
+
+#title {
+    font-size: 17pt;
+    font-weight: bold;
+}
+
+#version {
+    color: #000;
+    font-size: 10px;
+    width: 120px;
+}
+
+.idbox {
+    border: 1px solid #5da668;
+    width: 100px;
+    height: 17px;
+    margin-top: 2px;
+    font-size: 11px;
+}
+
+.subscript {
+	font-size: 9px;
+}
