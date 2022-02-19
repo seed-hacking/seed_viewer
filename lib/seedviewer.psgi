@@ -324,9 +324,9 @@ sub subsys_editor_main
 {
     my($cgi) = @_;
 
-    my $layout = WebLayout->new('./Html/SubsystemEditorLayout.tmpl');
-    $layout->add_css('./Html/SubsystemEditor.css');
-    $layout->add_css('./Html/default.css');
+    my $layout = WebLayout->new(TMPL_PATH . '/SubsystemEditorLayout.tmpl');
+    $layout->add_css("$FIG_Config::cgi_url/Html/SubsystemEditor.css");
+    $layout->add_css("$FIG_Config::cgi_url/Html/default.css");
     
     my $menu = WebMenu->new();
     $menu->add_category( 'Home', 'SubsysEditor.cgi?page=SubsystemOverview' );

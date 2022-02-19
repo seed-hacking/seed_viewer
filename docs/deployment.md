@@ -10,3 +10,12 @@ in both the development container and the deployment directory.
 CGI sources will be located in the cgi-scripts directory in the source modules.
 
 
+
+## Administration issues
+
+### Creating logins
+
+```
+user_add -firstname Robert -lastname Olson -login olsonadmin -email olson@mcs.anl.gov
+user_add_login_right -application SeedViewer -login olsonadmin -grant
+```
