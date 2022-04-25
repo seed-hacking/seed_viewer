@@ -318,8 +318,11 @@ sub cache_data {
   }
   
   # the data is not cached, calculate it
+  my @to_cache_parms = map { join("::",@$_) } ($ref_info,@other_genomes_info);
   my $to_cache_parms = join(" ",(map { join("::",@$_) } ($ref_info,@other_genomes_info)));
-  system "$FIG_Config::bin/cache_comparison_data $to_cache_parms < /dev/null > /dev/null 2> /dev/null &";
+  print STDERR Dumper("RUN", @to_cache_parms);
+  system "$FIG_Config::bin/cache_comparison_data",  @to_cache_parms;
+  #system "$FIG_Config::bin/cache_comparison_data $to_cache_parms < /dev/null > /dev/null 2> /dev/null &";
 
   return $orgs_ready;
 }
