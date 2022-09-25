@@ -12,25 +12,25 @@ use warnings;
 our $have_aligns;
 eval {
     require AlignsAndTreesServer;
-    $have_aligns = 1;
+    $have_aligns = 0;
 };
 
 our $have_anno;
 eval {
     require ANNOserver;
-    $have_anno = 1;
+    $have_anno = 0;
 };
 
 our $have_alitre;
 eval {
     require ALITREserver;
-    $have_alitre = 1;
+    $have_alitre = 0;
 };
 
 our $have_sap;
 eval {
     require SAPserver;
-    $have_sap = 1;
+    $have_sap = 0;
 };
 
 
