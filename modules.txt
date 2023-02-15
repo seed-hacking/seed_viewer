@@ -1,0 +1,14 @@
+p3_core
+seed_config
+seed_core
+seed_db
+seed_gjo
+seed_styles
+seed_svr
+seed_tools
+seed_viewer
+sprout
+subsystem_editor
+subsystem_extension
+sv_ppo
+sv_web_application
