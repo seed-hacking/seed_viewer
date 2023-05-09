@@ -1701,7 +1701,7 @@ sub  print_children {
 
     my $expanded = 0;
     $expanded = 1 if ($level <= 3);
-    if (defined(@{$$families{children}{$tax}})){
+    if (@{$$families{children}{$tax}}){
 	my $lineage = $families->{"lineage"}->{$tax};
 	my $label = qq(<input type=checkbox name="lineageBoxes" value="$lineage" id="$lineage" onClick="ClickLineageBoxes('$tax','$lineage');javascript:execute_ajax('myFunction', 'ajax_target', 'lineages', 'Processing...', 0);"><font color=$$families{color}{$tax}>$tax</font> [$$families{count}{$tax}]);
 	$node{$level} = $node{$level-1}->add_child( {'label' => $label, 'expanded' => $expanded } ) if ($tax !~ /Root/);
@@ -1841,7 +1841,7 @@ sub get_simsGraphicTable{
     my $content;
 
     # query function
-    my ($fid) = $cgi->param('feature');
+    my $fid = $cgi->param('feature');
     my $query_function = $fig->function_of($fid);
 
     # function cell

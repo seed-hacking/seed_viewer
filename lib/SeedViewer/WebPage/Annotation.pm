@@ -412,16 +412,23 @@ function sh_aliases2 () {
   my $coreg_str;
   if ($have_sap)
   {
-      my $sap = SAPserver->new();
-      my $rel = $sap->coregulated_fids(-ids => [$id]);
-      my $relH = $rel->{$id};
-      my $n = keys %$relH;
-      if ($n > 0)
+      my $sap = eval { SAPserver->new();};
+      if ($@)
       {
-	  my $url = $application->url . "?page=CoregulatedFeatures&feature=$id";
-	  my $txt = "<a href='$url'>$n pegs</a>";
-	  $coreg_str = "<tr><th>coregulated with</th><td>$txt</td></tr>";
+	$have_sap = 0;
       }
+      else
+      {
+	  my $rel = $sap->coregulated_fids(-ids => [$id]);
+	  my $relH = $rel->{$id};
+	  my $n = keys %$relH;
+	  if ($n > 0)
+	  {
+	      my $url = $application->url . "?page=CoregulatedFeatures&feature=$id";
+	      my $txt = "<a href='$url'>$n pegs</a>";
+	      $coreg_str = "<tr><th>coregulated with</th><td>$txt</td></tr>";
+	  }
+     }
   }
   
   my $edit_fr_str;
