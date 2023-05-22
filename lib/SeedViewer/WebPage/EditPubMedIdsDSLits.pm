@@ -7,7 +7,7 @@ use HTML;
 use Data::Dumper;
 use LWP;
 
-use FigWebServices::SeedComponents::PubMed;
+use SeedComponents::PubMed;
 
 use FIG;
 use SeedViewer::SeedViewer qw( user_can_annotate_genome get_pmed_info );

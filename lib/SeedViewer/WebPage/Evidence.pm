@@ -1841,7 +1841,7 @@ sub get_simsGraphicTable{
     my $content;
 
     # query function
-    my ($fid) = $cgi->param('feature');
+    my $fid = $cgi->param('feature');
     my $query_function = $fig->function_of($fid);
 
     # function cell

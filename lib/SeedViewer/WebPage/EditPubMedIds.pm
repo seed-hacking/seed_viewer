@@ -8,7 +8,7 @@ use Data::Dumper;
 use LWP;
 use SeedViewer::SeedViewer;
 
-use FigWebServices::SeedComponents::PubMed;
+use SeedComponents::PubMed;
 
 use FIG;
 
@@ -261,7 +261,7 @@ sub journals_as_htmltable {
   }
 
   my $tabl_rows;
-  my @process_journals = &FigWebServices::SeedComponents::PubMed::process_and_sort_journals (\@journals);
+  my @process_journals = &SeedComponents::PubMed::process_and_sort_journals (\@journals);
   foreach (@process_journals) {
     
     my($pegs,$pmid,$yr,$month,$day, $title)=split(/\t/);
@@ -350,11 +350,11 @@ sub save_to_attributes {
       $error .= "PMID:$to_add is already in the attribute database<p>";      
     }
     else {
-      my $add_title = &FigWebServices::SeedComponents::PubMed::pmid_to_title($to_add);
+      my $add_title = &SeedComponents::PubMed::pmid_to_title($to_add);
       my $add_url = "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=$to_add";	
       $self->{ 'fig' }->add_attribute( $peg, "PUBMED_CURATED_RELEVANT", "$seeduser,$to_add,$add_title", $add_url );	
       
-      my $output_table = &FigWebServices::SeedComponents::PubMed::get_author_date_title( $to_add ); 
+      my $output_table = &SeedComponents::PubMed::get_author_date_title( $to_add ); 
       my ($id, $author, $date, $title) = split(/\;/, $output_table);
       my $peg_relevant_value = "$author\;$date\;$title";
       $self->{ 'fig' }->add_attribute( "Role:$role", "ROLE_FROM_PEG_RELEVANT",  "$to_add\;$seeduser\;$peg_relevant_value" );
@@ -374,7 +374,7 @@ sub save_to_attributes {
     $curated_pmid =~ s/\(.*\)//;
 
     # get some info for the pubmed id #
-    my $value = &FigWebServices::SeedComponents::PubMed::pmid_to_title($curated_pmid);
+    my $value = &SeedComponents::PubMed::pmid_to_title($curated_pmid);
     my $base_url = "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=";
     my $url = "$base_url.$curated_pmid";    
 
@@ -394,7 +394,7 @@ sub save_to_attributes {
     if ( !$current_attributes{ $curated_pmid }->{ 'att_key' } 
 	 || $current_attributes{ $curated_pmid }->{ 'att_key' } ne $curated_key ) {
       
-      my $output_table = &FigWebServices::SeedComponents::PubMed::get_author_date_title( $curated_pmid ); 
+      my $output_table = &SeedComponents::PubMed::get_author_date_title( $curated_pmid ); 
       my ($id, $author, $date, $title) = split( /\;/, $output_table );
       my $peg_relevant_value = "$author\;$date\;$title";
       $self->{ 'fig' }->add_attribute( $peg, $curated_key, "$seeduser,$curated_pmid,$value", $url );		
@@ -425,7 +425,7 @@ sub save_to_attributes {
 
       $self->{ 'fig' }->add_attribute( $peg, $curated_key, "$seeduser,$curated_pmid,$value", $url );			
       
-      my $output_table = &FigWebServices::SeedComponents::PubMed::get_author_date_title( $curated_pmid ); 
+      my $output_table = &SeedComponents::PubMed::get_author_date_title( $curated_pmid ); 
       my ( $id, $author, $date, $title ) = split(/\;/, $output_table);
       my $peg_relevant_value = "$author\;$date\;$title";
       $self->{ 'fig' }->add_attribute("Role:$role", "ROLE_FROM_PEG_RELEVANT",  "$curated_pmid\;$seeduser\;$peg_relevant_value");
