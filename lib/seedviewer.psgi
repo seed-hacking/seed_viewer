@@ -18,6 +18,7 @@ use Data::Dumper;
 require CGI::Emulate::PSGI;
 
 use SimCompute;
+use GenomeDownload;
 
 require Plack::App::CGIBin;
 require Plack::App::File;
@@ -126,6 +127,7 @@ return builder {
     mount "$base/FIG/ajax.cgi" => $ajax;
     mount "$base/FIG" => $app;
     mount "$base/sims" => SimCompute->psgi_app;
+    mount "$base/download" => GenomeDownload->psgi_app;
    mount "$base/quit" => sub { exit };
 };
 
