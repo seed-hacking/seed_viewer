@@ -13,7 +13,7 @@ use FIGRules;
 use FIG_Config;
 use WebConfig;
 use Data::Dumper;
-
+use SeedAPI;
 
 require CGI::Emulate::PSGI;
 
@@ -68,6 +68,8 @@ if (-f $htpasswd)
 }
 
 my $figdisk = $FIG_Config::fig;
+
+my $api = SeedAPI->psgi_app();
 
 my $sv = CGI::Emulate::PSGI->handler(sub {
     CGI::initialize_globals();
@@ -128,6 +130,7 @@ return builder {
     mount "$base/FIG" => $app;
     mount "$base/sims" => SimCompute->psgi_app;
     mount "$base/FIG/dl" => GenomeDownload->psgi_app;
+    mount "$base/api" => $api;
    mount "$base/quit" => sub { exit };
 };
 
