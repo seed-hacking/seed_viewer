@@ -127,7 +127,7 @@ return builder {
     mount "$base/FIG/ajax.cgi" => $ajax;
     mount "$base/FIG" => $app;
     mount "$base/sims" => SimCompute->psgi_app;
-    mount "$base/download" => GenomeDownload->psgi_app;
+    mount "$base/FIG/dl" => GenomeDownload->psgi_app;
    mount "$base/quit" => sub { exit };
 };
 

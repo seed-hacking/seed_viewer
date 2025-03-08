@@ -156,15 +156,27 @@ sub output {
   
   my $html = "<h2>Export for $org_name ($org_id)</h2>";
   if (! $FIG_Config::nmpdr_text) {
-    $html .= "<div style='padding-left: 20px; text-align: justify; width: 800px;'>We support a large set of different information about our organisms. All this information is based on the manual curation effort of our annotators. The underlying data they created is freely available on our ftp site at:</div><div style='padding-left: 20px; text-align: center; width: 800px;'><a href='ftp://ftp.theseed.org/' target=_blank>ftp://ftp.theseed.org/</a></div>";
-  
+    $html .= <<END;
+
+    <div style='padding-left: 20px; text-align: justify; width: 800px;'>
+    Data exports may be performed using the URL $FIG_Config::cgi_url/dl/genome-id/data-type
+    <p>The list of data types is available at $FIG_Config::cgi_url/dl/doc.
+
+END
+
     if ($job) {
       $html .= "<br><div style='padding-left: 20px; text-align: justify; width: 800px;'>This is a RAST organism, which is currently not in the SEED. If you would like to download this genome, please follow this link to get to the according RAST page:<br><ul><li><a href='rast.cgi?page=JobDetails&job=" . $job->id() . "'>RAST job details page for $org_name</a></li></ul></div>";
     } else {
-      $html .= "<br><div style='padding-left: 20px; text-align: justify; width: 800px;'>You can download the multiple FASTA and a tab separated file of this genome through the following links (right click, save as):<br/><ul><li><a href='ftp://ftp.theseed.org/genomes/SEED/$org_id.faa'>FASTA</a></li><li><a href='ftp://ftp.theseed.org/genomes/SEED/$org_id.tbl'>Tabular</a></li><li><a href='ftp://ftp.theseed.org/genomes/genbank/$org_id.gbk'>GenBank</a></li></ul></div>";
+      $html .= <<END;
+<br><div style='padding-left: 20px; text-align: justify; width: 800px;'>
+You can download the multiple FASTA and a tab separated file of this genome through the following links (right click, save as):<br/>
+<ul><li><a href='$FIG_Config::cgi_url/dl/$org_id/protein_fasta'>FASTA</a></li>
+<li><a href='$FIG_Config::cgi_url/dl/$org_id/patric_features'>Tabular</a>
+</li><li><a href='$FIG_Config::cgi_url/dl/$org_id/genbank'>GenBank</a></li></ul></div>
+END
     }
     
-    $html .= "<div style='padding-left: 20px; text-align: justify; width: 800px;'>The table below includes all features of this genome. You have multiple options of filtering that table. Using the <b>export table</b> button, you can export the table in it's currently filtered form into tab separated format, useable for any spreadsheet application.</div><br><br>";
+    $html .= "<div style='padding-left: 20px; text-align: justify; width: 800px;'>The table below includes all features of this genome. You have multiple options of filtering that table. Using the <b>export table</b> button, you can export the table in it's currently filtered form into tab separated format, usable for any spreadsheet application.</div><br><br>";
   }
   $html .= $org_table->output();
 
